@@ -72,9 +72,42 @@ const generatePassword = (lower, upper, number, symbol, length) => {
         });
     }
     // so we can get the actual length of the password
-    const finalPassword = generatePassword.slice(0, length)
-    return finalPassword
+    // creating an array, so i could suffel the password - so the order would be different (otherwise ia always lowercase,uppercase,number,symbol)
+    const finalPassword = generatePassword.slice(0, length).split("")
+
+
+    // return finalPassword
+
+
+  // Fisher-Yates shuffle algorithm to mish-mash the password
+  // TO-DO: I don' fully understand how it works
+  const passwordShuffler = (finalPassword) => {
+    let currentIndex = finalPassword.length, temporaryValue, randomIndex;
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+  
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+  
+      // And swap it with the current element.
+      temporaryValue = finalPassword[currentIndex];
+      finalPassword[currentIndex] = finalPassword[randomIndex];
+      finalPassword[randomIndex] = temporaryValue;
+    }
+    
+    // returns a string
+    return finalPassword.join("")
+    
+  };
+
+return passwordShuffler(finalPassword);
+
+
+
 }
+
+
 
 
 
